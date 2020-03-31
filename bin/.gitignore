@@ -1,1 +1,5 @@
-*.class
+/Appliance.class
+/ApplianceList.class
+/Company.class
+/Customer.class
+/Purchase.class
