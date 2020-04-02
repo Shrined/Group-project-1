@@ -1,1 +1,13 @@
-*.class
+/Appliance.class
+/ApplianceList.class
+/Company.class
+/Customer.class
+/CustomerList.class
+/Inventory.class
+/Purchase.class
+/PurchaseList.class
+/RepairPlan.class
+/RepairPlanList.class
+/UserInterface.class
+/BackOrders.class
+/BackOrderList.class
