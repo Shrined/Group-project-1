@@ -1,3 +1,5 @@
+package org.groupproject.application;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +9,16 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
+import org.groupproject.appliances.Appliance;
+import org.groupproject.appliances.ApplianceList;
+import org.groupproject.customer.Customer;
+import org.groupproject.customer.CustomerList;
+import org.groupproject.orders.BackOrderList;
+import org.groupproject.orders.Inventory;
+import org.groupproject.orders.Purchase;
+import org.groupproject.orders.RepairPlan;
+import org.groupproject.orders.RepairPlanList;
 
 /**
  * 
