@@ -1,4 +1,16 @@
+package org.groupproject.application;
+
 import java.io.Serializable;
+
+import org.groupproject.appliances.Appliance;
+import org.groupproject.appliances.ApplianceList;
+import org.groupproject.customer.Customer;
+import org.groupproject.customer.CustomerList;
+import org.groupproject.orders.BackOrderList;
+import org.groupproject.orders.Inventory;
+import org.groupproject.orders.Purchase;
+import org.groupproject.orders.RepairPlan;
+import org.groupproject.orders.RepairPlanList;
 
 public class Company implements Serializable {
 	private static final long serialVersionUID = 1L;
