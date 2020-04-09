@@ -34,6 +34,10 @@ public class UserInterface {
 	private static UserInterface userInterface;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static Company company;
+
+	/**
+	 * Menu options
+	 */
 	private static final int EXIT = 0;
 	private static final int ADD_MODEL = 1;
 	private static final int ADD_CUSTOMER = 2;
@@ -49,6 +53,15 @@ public class UserInterface {
 	private static final int LIST_BACKORDERS = 12;
 	private static final int SAVE = 13;
 	private static final int HELP = 14;
+
+	/**
+	 * Model options
+	 */
+	private static final int CLOTH_DRYER = 1;
+	private static final int CLOTH_WASHER = 2;
+	private static final int FURNACE = 3;
+	private static final int KITCHEN_RANGE = 4;
+	private static final int REFRIGERATOR = 5;
 
 	/**
 	 * Made private for singleton pattern. Conditionally looks for any saved data.
@@ -194,39 +207,74 @@ public class UserInterface {
 	}
 
 	/**
+	 * Displays all the options for types of appliances the user can add
+	 */
+	private void applianceOptions() {
+		System.out.println("Enter a number between 1 and 5 to select what model" + " you wish to add");
+		System.out.println(CLOTH_DRYER + " To add a cloth dryer");
+		System.out.println(CLOTH_WASHER + " To add a cloth washer");
+		System.out.println(FURNACE + " To add a furnace");
+		System.out.println(KITCHEN_RANGE + " To add a kitchen range");
+		System.out.println(REFRIGERATOR + " To add a refrigerator");
+	}
+
+	/**
 	 * Method to be called for adding a model. Prompts the user for the appropriate
 	 * values and uses the appropriate Company method for adding the model.
 	 * 
 	 */
 	public void addModels() {
 		Appliance result;
+		applianceOptions();
 		Scanner input = new Scanner(System.in);
 		do {
-			String modelName = getToken("Enter model name");
-			String type = getToken("Enter type of appliance");
-			if (type.equalsIgnoreCase("washer") || type.equalsIgnoreCase("dryer")) {
+			int selection = input.nextInt();
+			switch (selection) {
+			case CLOTH_DRYER:
+				System.out.println("Enter model name");
+				String modelName = input.next();
 				System.out.println("Enter repair plan cost");
 				double repairPlanCost = input.nextFloat();
-				result = company.addWasherDryerModel(modelName, type, repairPlanCost);
-			} else if (type.equalsIgnoreCase("refrigerator")) {
-				System.out.println("Enter capacity");
-				int capacity = input.nextInt();
-				result = company.addRefrigeratorModel(modelName, type, capacity);
-			} else if (type.equalsIgnoreCase("furnace")) {
-				System.out.println("Enter heat output");
-				int heatOutput = input.nextInt();
-				result = company.addFurnaceModel(modelName, type, heatOutput);
-			} else {
-				result = company.addModel(modelName, type);
+				System.out.println("Enter brand name");
+				String brandName = input.next();
+				result = company.addClothDryerModel(modelName, brandName, repairPlanCost);
+				break;
+			case CLOTH_WASHER:
+				break;
+			case FURNACE:
+				break;
+			case KITCHEN_RANGE:
+				break;
+			case REFRIGERATOR:
+				break;
 			}
-			if (result != null) {
-				System.out.println(result);
-			} else {
-				System.out.println("Model could not be added");
-			}
+
 		} while (yesOrNo("Add more models?"));
 		input.close();
 	}
+
+//	String modelName = getToken("Enter model name");
+//	String type = getToken("Enter type of appliance");
+//	if (type.equalsIgnoreCase("washer") || type.equalsIgnoreCase("dryer")) {
+//		System.out.println("Enter repair plan cost");
+//		double repairPlanCost = input.nextFloat();
+//		result = company.addWasherDryerModel(modelName, type, repairPlanCost);
+//	} else if (type.equalsIgnoreCase("refrigerator")) {
+//		System.out.println("Enter capacity");
+//		int capacity = input.nextInt();
+//		result = company.addRefrigeratorModel(modelName, type, capacity);
+//	} else if (type.equalsIgnoreCase("furnace")) {
+//		System.out.println("Enter heat output");
+//		int heatOutput = input.nextInt();
+//		result = company.addFurnaceModel(modelName, type, heatOutput);
+//	} else {
+//		result = company.addModel(modelName, type);
+//	}
+//	if (result != null) {
+//		System.out.println(result);
+//	} else {
+//		System.out.println("Model could not be added");
+//	}
 
 	/**
 	 * Method to be called for adding a customer. Prompts the user for the
