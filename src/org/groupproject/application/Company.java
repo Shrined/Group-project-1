@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.groupproject.appliances.Appliance;
 import org.groupproject.appliances.ApplianceList;
+import org.groupproject.appliances.ClothDryer;
 import org.groupproject.customer.Customer;
 import org.groupproject.customer.CustomerList;
 import org.groupproject.orders.BackOrderList;
@@ -14,10 +15,22 @@ import org.groupproject.orders.RepairPlanList;
 
 public class Company implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private ApplianceList applianceList;
+	private CustomerList customerList;
+	private static Company company;
+
+	private Company() {
+		applianceList = ApplianceList.instance();
+		customerList = CustomerList.instance();
+	}
 
 	public static Company instance() {
-		// TODO Auto-generated method stub
-		return null;
+		if (company == null) {
+			IdServer.instance();
+			return (company = new Company());
+		} else {
+			return company;
+		}
 	}
 
 	public Customer addCustomer(String name, String phone) {
@@ -25,23 +38,26 @@ public class Company implements Serializable {
 		return null;
 	}
 
-	public Appliance addModel(String modelName, String type) {
+	public Appliance addFurnaceModel(String modelName, String brandName, int heatOutput) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Appliance addFurnaceModel(String modelName, String type, int heatOutput) {
+	public Appliance addRefrigeratorModel(String modelName, String brandName, int capacity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Appliance addRefrigeratorModel(String modelName, String type, int capacity) {
+	public Appliance addClothWasherModel(String modelName, String brandName, double repairPlanCost) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Appliance addWasherDryerModel(String modelName, String type, double repairPlanCost) {
-		// TODO Auto-generated method stub
+	public Appliance addClothDryerModel(String modelName, String brandName, double repairPlanCost) {
+		Appliance appliance = new ClothDryer(modelName, brandName);
+		if (applianceList.insertAppliance(appliance)) {
+			return appliance;
+		}
 		return null;
 	}
 
