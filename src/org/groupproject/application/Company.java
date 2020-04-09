@@ -34,7 +34,10 @@ public class Company implements Serializable {
 	}
 
 	public Customer addCustomer(String name, String phone) {
-		// TODO Auto-generated method stub
+		Customer customer = new Customer(name, phone);
+		if (customerList.insertCustomer(customer)) {
+			return (customer);
+		}
 		return null;
 	}
 
