@@ -6,8 +6,8 @@ public class Refrigerator extends Appliance implements Serializable {
 	private static final long serialVersionUID = -5396198660202495282L;
 	private float capacity;
 
-	public Refrigerator(String brandName, String modelName, float capacity) {
-		super(brandName, modelName);
+	public Refrigerator(String brandName, String modelName, double price, float capacity) {
+		super(brandName, modelName, price);
 		this.capacity = capacity;
 	}
 

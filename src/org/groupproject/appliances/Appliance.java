@@ -9,11 +9,13 @@ public abstract class Appliance implements Serializable {
 	private String brandName;
 	private String modelName;
 	private String id;
+	private double price;
 	private static final String APPLIANCE_STRING = "A";
 
-	public Appliance(String brandName, String modelName) {
+	public Appliance(String brandName, String modelName, double price) {
 		this.brandName = brandName;
 		this.modelName = modelName;
+		this.price = price;
 		this.id = APPLIANCE_STRING + IdServer.instance().getApplianceId();
 	}
 
@@ -42,6 +44,19 @@ public abstract class Appliance implements Serializable {
 	 */
 	public String getId() {
 		return id;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Brand Name = " + brandName + ", Model Name = " + modelName + ", id = " + id;
 	}
 
 }
