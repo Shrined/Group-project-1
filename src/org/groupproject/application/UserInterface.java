@@ -59,7 +59,7 @@ public class UserInterface {
 	private static final int EXIT = 0;
 	private static final int ADD_MODEL = 1;
 	private static final int ADD_CUSTOMER = 2;
-	private static final int ADD_TO_INVETORY = 3;
+	private static final int ADD_TO_INVENTORY = 3;
 	private static final int PURCHASE = 4;
 	private static final int ENROLL_REPAIR_PLAN = 5;
 	private static final int WITHDRAW_REPAIR_PLAN = 6;
@@ -210,7 +210,7 @@ public class UserInterface {
 		System.out.println(EXIT + " to  Exit\n");
 		System.out.println(ADD_MODEL + "  to  add a model");
 		System.out.println(ADD_CUSTOMER + "  to  add a customer");
-		System.out.println(ADD_TO_INVETORY + "  to  add to inventory");
+		System.out.println(ADD_TO_INVENTORY + "  to  add to inventory");
 		System.out.println(PURCHASE + "  to  process a purchase ");
 		System.out.println(ENROLL_REPAIR_PLAN + "  to  enroll in a repair plan");
 		System.out.println(WITHDRAW_REPAIR_PLAN + "  to  withdraw from a repair plan");
@@ -532,7 +532,7 @@ public class UserInterface {
 			case ADD_CUSTOMER:
 				addCustomer();
 				break;
-			case ADD_TO_INVETORY:
+			case ADD_TO_INVENTORY:
 				addToInventory();
 				break;
 			case PURCHASE:
