@@ -37,7 +37,7 @@ public class Inventory implements Serializable {
 		String key = appliance.getId();
 		if (appliance != null) {
 			if (stock.containsKey(key)) {
-				stock.put(key, stock.get(key) + 1);
+				stock.put(key, stock.get(key) + quantity);
 			}
 			stock.put(appliance.getId(), quantity);
 			return true;
