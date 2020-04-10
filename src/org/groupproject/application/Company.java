@@ -21,11 +21,13 @@ public class Company implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private ApplianceList applianceList;
 	private CustomerList customerList;
+	private Inventory inventory;
 	private static Company company;
 
 	private Company() {
 		applianceList = ApplianceList.instance();
 		customerList = CustomerList.instance();
+		inventory = Inventory.instance();
 	}
 
 	public static Company instance() {
@@ -45,49 +47,51 @@ public class Company implements Serializable {
 		return null;
 	}
 
-	public Appliance addClothDryerModel(String modelName, String brandName, double repairPlanCost) {
-		Appliance appliance = new ClothDryer(modelName, brandName, repairPlanCost);
+	public Appliance addClothDryerModel(String modelName, String brandName, double price, double repairPlanCost) {
+		Appliance appliance = new ClothDryer(modelName, brandName, price, repairPlanCost);
 		if (applianceList.insertAppliance(appliance)) {
 			return appliance;
 		}
 		return null;
 	}
 
-	public Appliance addClothWasherModel(String modelName, String brandName, double repairPlanCost) {
-		Appliance appliance = new ClothWasher(modelName, brandName, repairPlanCost);
+	public Appliance addClothWasherModel(String modelName, String brandName, double price, double repairPlanCost) {
+		Appliance appliance = new ClothWasher(modelName, brandName, price, repairPlanCost);
 		if (applianceList.insertAppliance(appliance)) {
 			return appliance;
 		}
 		return null;
 	}
 
-	public Appliance addFurnaceModel(String modelName, String brandName, int heatOutput) {
-		Appliance appliance = new Furnace(modelName, brandName, heatOutput);
+	public Appliance addFurnaceModel(String modelName, String brandName, double price, int heatOutput) {
+		Appliance appliance = new Furnace(modelName, brandName, price, heatOutput);
 		if (applianceList.insertAppliance(appliance)) {
 			return appliance;
 		}
 		return null;
 	}
 
-	public Appliance addKitchenRangeModel(String modelName, String brandName) {
-		Appliance appliance = new KitchenRange(modelName, brandName);
+	public Appliance addKitchenRangeModel(String modelName, String brandName, double price) {
+		Appliance appliance = new KitchenRange(modelName, brandName, price);
 		if (applianceList.insertAppliance(appliance)) {
 			return appliance;
 		}
 		return null;
 	}
 
-	public Appliance addRefrigeratorModel(String modelName, String brandName, float capacity) {
-		Appliance appliance = new Refrigerator(modelName, brandName, capacity);
+	public Appliance addRefrigeratorModel(String modelName, String brandName, double price, float capacity) {
+		Appliance appliance = new Refrigerator(modelName, brandName, price, capacity);
 		if (applianceList.insertAppliance(appliance)) {
 			return appliance;
 		}
 		return null;
 	}
 
-	public Inventory addAppliance(String id, int quantity) {
-		// TODO Auto-generated method stub
-		return null;
+	public Appliance addAppliance(String id, int quantity) {
+		Appliance appliance;
+		appliance = applianceList.search(id);
+		inventory.addToStock(appliance, quantity);
+		return appliance;
 	}
 
 	public Purchase addPurchase(Customer customer, Appliance appliance, int quantity) {

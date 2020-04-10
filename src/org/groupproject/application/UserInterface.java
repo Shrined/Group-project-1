@@ -35,7 +35,6 @@ import org.groupproject.appliances.ApplianceList;
 import org.groupproject.customer.Customer;
 import org.groupproject.customer.CustomerList;
 import org.groupproject.orders.BackOrderList;
-import org.groupproject.orders.Inventory;
 import org.groupproject.orders.Purchase;
 import org.groupproject.orders.RepairPlan;
 import org.groupproject.orders.RepairPlanList;
@@ -251,35 +250,40 @@ public class UserInterface {
 			case CLOTH_DRYER: {
 				String modelName = getToken("Enter model name");
 				String brandName = getToken("Enter brand name");
+				double price = Double.parseDouble(getToken("Enter price"));
 				double repairPlanCost = Double.parseDouble(getToken("Enter repair plan cost"));
-				result = company.addClothDryerModel(modelName, brandName, repairPlanCost);
+				result = company.addClothDryerModel(modelName, brandName, price, repairPlanCost);
 				break;
 			}
 			case CLOTH_WASHER: {
 				String modelName = getToken("Enter model name");
 				String brandName = getToken("Enter brand name");
+				double price = Double.parseDouble(getToken("Enter price"));
 				double repairPlanCost = Double.parseDouble(getToken("Enter repair plan cost"));
-				result = company.addClothWasherModel(modelName, brandName, repairPlanCost);
+				result = company.addClothWasherModel(modelName, brandName, price, repairPlanCost);
 				break;
 			}
 			case FURNACE: {
 				String modelName = getToken("Enter model name");
 				String brandName = getToken("Enter brand name");
+				double price = Double.parseDouble(getToken("Enter price"));
 				int heatingOutput = Integer.parseInt(getToken("Enter heating output"));
-				result = company.addFurnaceModel(modelName, brandName, heatingOutput);
+				result = company.addFurnaceModel(modelName, brandName, price, heatingOutput);
 				break;
 			}
 			case KITCHEN_RANGE: {
 				String modelName = getToken("Enter model name");
 				String brandName = getToken("Enter brand name");
-				result = company.addKitchenRangeModel(modelName, brandName);
+				double price = Double.parseDouble(getToken("Enter price"));
+				result = company.addKitchenRangeModel(modelName, brandName, price);
 				break;
 			}
 			case REFRIGERATOR: {
 				String modelName = getToken("Enter model name");
 				String brandName = getToken("Enter brand name");
+				double price = Double.parseDouble(getToken("Enter price"));
 				float capacity = Integer.parseInt(getToken("Enter heating output"));
-				result = company.addRefrigeratorModel(modelName, brandName, capacity);
+				result = company.addRefrigeratorModel(modelName, brandName, price, capacity);
 				break;
 			}
 			default:
@@ -317,7 +321,7 @@ public class UserInterface {
 	 * inventory.
 	 */
 	public void addToInventory() {
-		Inventory result;
+		Appliance result;
 		Scanner input = new Scanner(System.in);
 		do {
 			String id = getToken("Enter appliance id");
@@ -325,11 +329,11 @@ public class UserInterface {
 			int quantity = input.nextInt();
 			result = company.addAppliance(id, quantity);
 			if (result != null) {
-				System.out.println(result);
+				System.out.println(result + " Quantity: " + quantity);
 			} else {
 				System.out.println("Appliance could not be added to inventory");
 			}
-		} while (yesOrNo("Add more models?"));
+		} while (yesOrNo("Add more models to inventory?"));
 		input.close();
 	}
 

@@ -1,5 +1,6 @@
 package org.groupproject.appliances;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,6 +37,16 @@ public class ApplianceList {
 	public boolean insertAppliance(Appliance appliance) {
 		appliances.add(appliance);
 		return true;
+	}
+
+	public Appliance search(String applianceId) {
+		for (Iterator iterator = appliances.iterator(); iterator.hasNext();) {
+			Appliance appliance = (Appliance) iterator.next();
+			if (appliance.getId().equals(applianceId)) {
+				return appliance;
+			}
+		}
+		return null;
 	}
 
 }
