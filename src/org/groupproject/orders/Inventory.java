@@ -8,14 +8,16 @@ import org.groupproject.appliances.Appliance;
 
 public class Inventory implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Map<Appliance, Integer> stock = new HashMap();
+	private Map<String, Integer> stock = new HashMap();
 	private static Inventory inventory;
+	private BackOrderList backOrderList;
 
 	/*
 	 * Private constructor for singleton pattern
 	 * 
 	 */
 	private Inventory() {
+		backOrderList = BackOrderList.instance();
 	}
 
 	/**
@@ -32,8 +34,15 @@ public class Inventory implements Serializable {
 	}
 
 	public boolean addToStock(Appliance appliance, int quantity) {
-		stock.put(appliance, quantity);
-		return true;
+		String key = appliance.getId();
+		if (appliance != null) {
+			if (stock.containsKey(key)) {
+				stock.put(key, stock.get(key) + quantity);
+			}
+			stock.put(appliance.getId(), quantity);
+			return true;
+		}
+		return false;
 	}
 
 }

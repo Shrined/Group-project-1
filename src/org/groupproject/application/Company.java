@@ -11,6 +11,7 @@ import org.groupproject.appliances.KitchenRange;
 import org.groupproject.appliances.Refrigerator;
 import org.groupproject.customer.Customer;
 import org.groupproject.customer.CustomerList;
+import org.groupproject.orders.BackOrder;
 import org.groupproject.orders.BackOrderList;
 import org.groupproject.orders.Inventory;
 import org.groupproject.orders.Purchase;
@@ -22,12 +23,14 @@ public class Company implements Serializable {
 	private ApplianceList applianceList;
 	private CustomerList customerList;
 	private Inventory inventory;
+	private BackOrderList backOrderList;
 	private static Company company;
 
 	private Company() {
 		applianceList = ApplianceList.instance();
 		customerList = CustomerList.instance();
 		inventory = Inventory.instance();
+		backOrderList = BackOrderList.instance();
 	}
 
 	public static Company instance() {
@@ -110,13 +113,11 @@ public class Company implements Serializable {
 	}
 
 	public Customer getCustomer(String customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		return customerList.search(customerId);
 	}
 
 	public Appliance getAppliance(String applianceId) {
-		// TODO Auto-generated method stub
-		return null;
+		return applianceList.search(applianceId);
 	}
 
 	public boolean buyAppliance(Appliance appliance, int quantity) {
@@ -124,9 +125,10 @@ public class Company implements Serializable {
 		return false;
 	}
 
-	public void createBackOrder(Customer customer, Appliance appliance, int quantity) {
-		// TODO Auto-generated method stub
-
+	public BackOrder createBackOrder(Customer customer, Appliance appliance, int quantity) {
+		BackOrder backorder = new BackOrder(customer, appliance, quantity);
+		backOrderList.insertBackOrder(backorder);
+		return backorder;
 	}
 
 	public RepairPlan enrollRepairPlan(String customerId, String applianceId) {
@@ -171,8 +173,7 @@ public class Company implements Serializable {
 	}
 
 	public BackOrderList getBackOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		return backOrderList;
 	}
 
 }

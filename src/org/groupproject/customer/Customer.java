@@ -8,6 +8,7 @@ import org.groupproject.application.IdServer;
 import org.groupproject.orders.Purchase;
 
 public class Customer implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String phone;
@@ -25,4 +26,9 @@ public class Customer implements Serializable {
 	public String toString() {
 		return "Customer [Name = " + name + ", Phone = " + phone + ", id = " + id + "]";
 	}
+
+	public String getId() {
+		return id;
+	}
+
 }
