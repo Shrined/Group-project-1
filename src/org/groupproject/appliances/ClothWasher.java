@@ -4,8 +4,20 @@ import java.io.Serializable;
 
 public class ClothWasher extends Appliance implements Serializable {
 	private static final long serialVersionUID = 1784444746354884922L;
+	private double repairPlanCost;
 
-	public ClothWasher(String brandName, String modelName) {
+	public ClothWasher(String brandName, String modelName, double repairPlanCost) {
 		super(brandName, modelName);
+		this.repairPlanCost = repairPlanCost;
+	}
+
+	public double getRepairPlanCost() {
+		return repairPlanCost;
+	}
+
+	@Override
+	public String toString() {
+		return "Cloth washer [Brand name: " + getBrandName() + ", Model name: " + getModelName()
+				+ ", Repair plan cost: " + repairPlanCost + ", id: " + getId() + "]";
 	}
 }

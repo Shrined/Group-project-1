@@ -136,8 +136,8 @@ public class UserInterface {
 	 * 
 	 */
 	private boolean yesOrNo(String prompt) {
-		String more = getToken(prompt + " (Y|y)[es] or anything else for no");
-		if (more.charAt(0) != 'y' && more.charAt(0) != 'Y') {
+		String more = getToken(prompt + " Please type yes or anything else for no");
+		if (!more.equalsIgnoreCase("yes")) {
 			return false;
 		}
 		return true;
@@ -191,7 +191,7 @@ public class UserInterface {
 	public int getCommand() {
 		do {
 			try {
-				int value = Integer.parseInt(getToken("Enter command:" + HELP + " for help"));
+				int value = Integer.parseInt(getToken("Enter command: " + HELP + " for help"));
 				if (value >= EXIT && value <= HELP) {
 					return value;
 				}
@@ -210,7 +210,7 @@ public class UserInterface {
 		System.out.println(EXIT + " to  Exit\n");
 		System.out.println(ADD_MODEL + "  to  add a model");
 		System.out.println(ADD_CUSTOMER + "  to  add a customer");
-		System.out.println(ADD_TO_INVETORY + "  to  add to invetory");
+		System.out.println(ADD_TO_INVETORY + "  to  add to inventory");
 		System.out.println(PURCHASE + "  to  process a purchase ");
 		System.out.println(ENROLL_REPAIR_PLAN + "  to  enroll in a repair plan");
 		System.out.println(WITHDRAW_REPAIR_PLAN + "  to  withdraw from a repair plan");
@@ -228,7 +228,6 @@ public class UserInterface {
 	 * Displays all the options for types of appliances the user can add
 	 */
 	private void applianceOptions() {
-		System.out.println("Enter a number between 1 and 5 to select what model" + " you wish to add");
 		System.out.println(CLOTH_DRYER + " To add a cloth dryer");
 		System.out.println(CLOTH_WASHER + " To add a cloth washer");
 		System.out.println(FURNACE + " To add a furnace");
@@ -242,57 +241,58 @@ public class UserInterface {
 	 * 
 	 */
 	public void addModels() {
-		Appliance result;
-		applianceOptions();
-		Scanner input = new Scanner(System.in);
+		int command;
+		Appliance result = null;
 		do {
-			int selection = input.nextInt();
-			switch (selection) {
-			case CLOTH_DRYER:
-				System.out.println("Enter model name");
-				String modelName = input.next();
-				System.out.println("Enter repair plan cost");
-				double repairPlanCost = input.nextFloat();
-				System.out.println("Enter brand name");
-				String brandName = input.next();
+			applianceOptions();
+			command = Integer
+					.parseInt(getToken("Enter a number between 1 and 5 to select what" + " model you wish to add"));
+			switch (command) {
+			case CLOTH_DRYER: {
+				String modelName = getToken("Enter model name");
+				String brandName = getToken("Enter brand name");
+				double repairPlanCost = Double.parseDouble(getToken("Enter repair plan cost"));
 				result = company.addClothDryerModel(modelName, brandName, repairPlanCost);
 				break;
-			case CLOTH_WASHER:
-				break;
-			case FURNACE:
-				break;
-			case KITCHEN_RANGE:
-				break;
-			case REFRIGERATOR:
+			}
+			case CLOTH_WASHER: {
+				String modelName = getToken("Enter model name");
+				String brandName = getToken("Enter brand name");
+				double repairPlanCost = Double.parseDouble(getToken("Enter repair plan cost"));
+				result = company.addClothWasherModel(modelName, brandName, repairPlanCost);
 				break;
 			}
-
+			case FURNACE: {
+				String modelName = getToken("Enter model name");
+				String brandName = getToken("Enter brand name");
+				int heatingOutput = Integer.parseInt(getToken("Enter heating output"));
+				result = company.addFurnaceModel(modelName, brandName, heatingOutput);
+				break;
+			}
+			case KITCHEN_RANGE: {
+				String modelName = getToken("Enter model name");
+				String brandName = getToken("Enter brand name");
+				result = company.addKitchenRangeModel(modelName, brandName);
+				break;
+			}
+			case REFRIGERATOR: {
+				String modelName = getToken("Enter model name");
+				String brandName = getToken("Enter brand name");
+				float capacity = Integer.parseInt(getToken("Enter heating output"));
+				result = company.addRefrigeratorModel(modelName, brandName, capacity);
+				break;
+			}
+			default:
+				System.out.println("Error occurred: Please enter a number between 1-5");
+				break;
+			}
+			if (result == null) {
+				System.out.println("Could not add a model");
+			} else {
+				System.out.println(result);
+			}
 		} while (yesOrNo("Add more models?"));
-		input.close();
 	}
-
-//	String modelName = getToken("Enter model name");
-//	String type = getToken("Enter type of appliance");
-//	if (type.equalsIgnoreCase("washer") || type.equalsIgnoreCase("dryer")) {
-//		System.out.println("Enter repair plan cost");
-//		double repairPlanCost = input.nextFloat();
-//		result = company.addWasherDryerModel(modelName, type, repairPlanCost);
-//	} else if (type.equalsIgnoreCase("refrigerator")) {
-//		System.out.println("Enter capacity");
-//		int capacity = input.nextInt();
-//		result = company.addRefrigeratorModel(modelName, type, capacity);
-//	} else if (type.equalsIgnoreCase("furnace")) {
-//		System.out.println("Enter heat output");
-//		int heatOutput = input.nextInt();
-//		result = company.addFurnaceModel(modelName, type, heatOutput);
-//	} else {
-//		result = company.addModel(modelName, type);
-//	}
-//	if (result != null) {
-//		System.out.println(result);
-//	} else {
-//		System.out.println("Model could not be added");
-//	}
 
 	/**
 	 * Method to be called for adding a customer. Prompts the user for the
@@ -422,7 +422,7 @@ public class UserInterface {
 
 	/**
 	 * Method used to list all appliances or to list all the appliances of a
-	 * specific type. It uses the appropiate Company methods to get the appliances.
+	 * specific type. It uses the appropriate Company methods to get the appliances.
 	 */
 	public void getAppliances() {
 		ApplianceList result;
@@ -440,7 +440,7 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method used to list all user repair plans. It uses the appropiate Company
+	 * Method used to list all user repair plans. It uses the appropriate Company
 	 * method to get all users in repair plans.
 	 */
 	public void getUsersInRepairPlans() {
@@ -454,7 +454,7 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method used to list all the customers. It uses the appropiate Company method
+	 * Method used to list all the customers. It uses the appropriate Company method
 	 * to get all the customers.
 	 */
 	public void getCustomers() {
@@ -469,7 +469,7 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method used to list all the back orders. It uses the appropiate Company
+	 * Method used to list all the back orders. It uses the appropriate Company
 	 * method to get all the backorders.
 	 */
 	public void getBackorders() {

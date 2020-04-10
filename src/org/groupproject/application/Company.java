@@ -5,6 +5,10 @@ import java.io.Serializable;
 import org.groupproject.appliances.Appliance;
 import org.groupproject.appliances.ApplianceList;
 import org.groupproject.appliances.ClothDryer;
+import org.groupproject.appliances.ClothWasher;
+import org.groupproject.appliances.Furnace;
+import org.groupproject.appliances.KitchenRange;
+import org.groupproject.appliances.Refrigerator;
 import org.groupproject.customer.Customer;
 import org.groupproject.customer.CustomerList;
 import org.groupproject.orders.BackOrderList;
@@ -41,23 +45,40 @@ public class Company implements Serializable {
 		return null;
 	}
 
-	public Appliance addFurnaceModel(String modelName, String brandName, int heatOutput) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Appliance addRefrigeratorModel(String modelName, String brandName, int capacity) {
-		// TODO Auto-generated method stub
+	public Appliance addClothDryerModel(String modelName, String brandName, double repairPlanCost) {
+		Appliance appliance = new ClothDryer(modelName, brandName, repairPlanCost);
+		if (applianceList.insertAppliance(appliance)) {
+			return appliance;
+		}
 		return null;
 	}
 
 	public Appliance addClothWasherModel(String modelName, String brandName, double repairPlanCost) {
-		// TODO Auto-generated method stub
+		Appliance appliance = new ClothWasher(modelName, brandName, repairPlanCost);
+		if (applianceList.insertAppliance(appliance)) {
+			return appliance;
+		}
 		return null;
 	}
 
-	public Appliance addClothDryerModel(String modelName, String brandName, double repairPlanCost) {
-		Appliance appliance = new ClothDryer(modelName, brandName);
+	public Appliance addFurnaceModel(String modelName, String brandName, int heatOutput) {
+		Appliance appliance = new Furnace(modelName, brandName, heatOutput);
+		if (applianceList.insertAppliance(appliance)) {
+			return appliance;
+		}
+		return null;
+	}
+
+	public Appliance addKitchenRangeModel(String modelName, String brandName) {
+		Appliance appliance = new KitchenRange(modelName, brandName);
+		if (applianceList.insertAppliance(appliance)) {
+			return appliance;
+		}
+		return null;
+	}
+
+	public Appliance addRefrigeratorModel(String modelName, String brandName, float capacity) {
+		Appliance appliance = new Refrigerator(modelName, brandName, capacity);
 		if (applianceList.insertAppliance(appliance)) {
 			return appliance;
 		}
