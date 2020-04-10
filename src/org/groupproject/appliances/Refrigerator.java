@@ -20,4 +20,10 @@ public class Refrigerator extends Appliance implements Serializable {
 		return capacity;
 	}
 
+	@Override
+	public String toString() {
+		return "Refrigerator [Brand name: " + getBrandName() + ", Model name: " + getModelName() + ", Capacity: "
+				+ capacity + ", id: " + getId() + "]";
+	}
+
 }
