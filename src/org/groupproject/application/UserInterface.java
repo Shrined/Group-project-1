@@ -27,13 +27,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import org.groupproject.appliances.Appliance;
 import org.groupproject.appliances.ApplianceList;
 import org.groupproject.customer.Customer;
 import org.groupproject.customer.CustomerList;
+import org.groupproject.orders.BackOrder;
 import org.groupproject.orders.BackOrderList;
 import org.groupproject.orders.Purchase;
 import org.groupproject.orders.RepairPlan;
@@ -317,57 +317,73 @@ public class UserInterface {
 
 	/**
 	 * Method called for adding an appliance to the inventory. Prompts the user for
-	 * the appropiate values and uses the appropiate Company method for adding to
+	 * the appropriate values and uses the appropriate Company method for adding to
 	 * inventory.
 	 */
 	public void addToInventory() {
-		Appliance result;
-		Scanner input = new Scanner(System.in);
+		Appliance result = null;
+		BackOrder backorder;
 		do {
 			String id = getToken("Enter appliance id");
-			System.out.println("Enter quantity");
-			int quantity = input.nextInt();
-			result = company.addAppliance(id, quantity);
+			int quantity = Integer.parseInt(getToken("Enter quantity"));
+			while (quantity > 0) {
+				backorder = company.getBackOrders().search(id);
+				if (backorder != null) {
+					company.getBackOrders().removeBackorder(id);
+					System.out.println("Backorder request fulfilled");
+					System.out.println(backorder);
+					quantity--;
+				}
+				break;
+			}
+			if (quantity != 0) {
+				result = company.addAppliance(id, quantity);
+			}
 			if (result != null) {
 				System.out.println(result + " Quantity: " + quantity);
 			} else {
 				System.out.println("Appliance could not be added to inventory");
 			}
 		} while (yesOrNo("Add more models to inventory?"));
-		input.close();
 	}
 
 	/**
 	 * Method called for processing purchases. Prompts the user for the customer id
-	 * and appliance id. It uses the appropiate company methods to process a
+	 * and appliance id. It uses the appropriate company methods to process a
 	 * purchase.
 	 */
 	public void purchase() {
 		Purchase result = null;
-		Scanner input = new Scanner(System.in);
-		String customerId = getToken("Enter customer id");
-		Customer customer = company.getCustomer(customerId);
-		String applianceId = getToken("Enter appliance id");
-		Appliance appliance = company.getAppliance(applianceId);
-		System.out.println("Enter quantity");
-		int quantity = input.nextInt();
-		boolean inStock = company.buyAppliance(appliance, quantity);
-		if (inStock == true) {
-			result = company.addPurchase(customer, appliance, quantity);
-		} else if (inStock == false) {
-			company.createBackOrder(customer, appliance, quantity);
-		}
-		if (result != null) {
-			System.out.println(result);
-		} else {
-			System.out.println("Appliance is out of stock");
-		}
-		input.close();
+		do {
+			String customerId = getToken("Enter customer id");
+			Customer customer = company.getCustomer(customerId);
+			if (customer == null) {
+				System.out.println("Invalid customer id");
+			}
+			String applianceId = getToken("Enter appliance id");
+			Appliance appliance = company.getAppliance(applianceId);
+			if (appliance == null) {
+				System.out.println("Invalid appliance id");
+			}
+			int quantity = Integer.parseInt(getToken("Enter quantity"));
+			boolean inStock = company.buyAppliance(appliance, quantity);
+			if (inStock == true) {
+				result = company.addPurchase(customer, appliance, quantity);
+			} else if (inStock == false) {
+				System.out.println("This appliance is not in stock. A backorder has been placed");
+				System.out.println(company.createBackOrder(customer, appliance, quantity));
+			}
+			if (result != null) {
+				System.out.println(result);
+			} else {
+				System.out.println("Appliance is out of stock");
+			}
+		} while (yesOrNo("Do you want to make another purchase?"));
 	}
 
 	/**
 	 * Method used to enroll a customer in a repair plan it prompts the user for the
-	 * appropiate values and uses the appropiate Company method to enroll the
+	 * appropriate values and uses the appropriate Company method to enroll the
 	 * customer in a repair plan.
 	 */
 	public void enrollRepairPlan() {
