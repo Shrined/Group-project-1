@@ -50,13 +50,9 @@ public abstract class Appliance implements Serializable {
 		return price;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
 	@Override
 	public String toString() {
-		return "Brand Name = " + brandName + ", Model Name = " + modelName + ", id = " + id;
+		return "Brand Name = " + brandName + ", Model Name = " + modelName + ", id = " + id + ", Price = " + price;
 	}
 
 }

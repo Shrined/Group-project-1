@@ -17,7 +17,7 @@ public class ClothWasher extends Appliance implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cloth washer [Brand name: " + getBrandName() + ", Model name: " + getModelName()
-				+ ", Repair plan cost: " + repairPlanCost + ", id: " + getId() + "]";
+		return "Cloth washer [Brand name: " + getBrandName() + ", Model name: " + getModelName() + ", Price: "
+				+ getPrice() + ", Repair plan cost: " + repairPlanCost + ", id: " + getId() + "]";
 	}
 }
