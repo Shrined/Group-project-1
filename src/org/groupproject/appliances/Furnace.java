@@ -22,7 +22,7 @@ public class Furnace extends Appliance implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Furnace [Brand name: " + getBrandName() + ", Model name: " + getModelName() + ", Heating output (BTU): "
-				+ heatingOutput + ", id: " + getId() + "]";
+		return "Furnace [Brand name: " + getBrandName() + ", Model name: " + getModelName() + ", Price: " + getPrice()
+				+ ", Heating output (BTU): " + heatingOutput + ", id: " + getId() + "]";
 	}
 }

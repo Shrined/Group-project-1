@@ -35,6 +35,10 @@ public class BackOrder implements Serializable {
 		return appliance;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
 	@Override
 	public String toString() {
 		return "Backorder Info [Customer ID: " + customer.getId() + ", Appliance ID: " + appliance.getId()

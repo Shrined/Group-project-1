@@ -17,6 +17,7 @@ import org.groupproject.orders.Inventory;
 import org.groupproject.orders.Purchase;
 import org.groupproject.orders.RepairPlan;
 import org.groupproject.orders.RepairPlanList;
+import org.groupproject.orders.Sales;
 
 public class Company implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,6 +25,7 @@ public class Company implements Serializable {
 	private CustomerList customerList;
 	private Inventory inventory;
 	private BackOrderList backOrderList;
+	private Sales sales;
 	private static Company company;
 
 	private Company() {
@@ -31,6 +33,7 @@ public class Company implements Serializable {
 		customerList = CustomerList.instance();
 		inventory = Inventory.instance();
 		backOrderList = BackOrderList.instance();
+		sales = Sales.instance();
 	}
 
 	public static Company instance() {
@@ -98,8 +101,8 @@ public class Company implements Serializable {
 	}
 
 	public Purchase addPurchase(Customer customer, Appliance appliance, int quantity) {
-		// TODO Auto-generated method stub
-		return null;
+		Purchase purchase = new Purchase(customer, appliance, quantity);
+		return purchase;
 	}
 
 	public boolean save() {
@@ -120,9 +123,15 @@ public class Company implements Serializable {
 		return applianceList.search(applianceId);
 	}
 
-	public boolean buyAppliance(Appliance appliance, int quantity) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean buyAppliance(String id, int quantity) {
+		Appliance appliance;
+		boolean result;
+		appliance = applianceList.search(id);
+		result = inventory.removeFromStock(appliance, quantity);
+		if (result == true) {
+			sales.addRevenue(appliance.getPrice() * quantity);
+		}
+		return result;
 	}
 
 	public BackOrder createBackOrder(Customer customer, Appliance appliance, int quantity) {

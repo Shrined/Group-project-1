@@ -355,6 +355,7 @@ public class UserInterface {
 	public void purchase() {
 		Purchase result = null;
 		do {
+			result = null;
 			String customerId = getToken("Enter customer id");
 			Customer customer = company.getCustomer(customerId);
 			if (customer == null) {
@@ -366,7 +367,7 @@ public class UserInterface {
 				System.out.println("Invalid appliance id");
 			}
 			int quantity = Integer.parseInt(getToken("Enter quantity"));
-			boolean inStock = company.buyAppliance(appliance, quantity);
+			boolean inStock = company.buyAppliance(applianceId, quantity);
 			if (inStock == true) {
 				result = company.addPurchase(customer, appliance, quantity);
 			} else if (inStock == false) {
