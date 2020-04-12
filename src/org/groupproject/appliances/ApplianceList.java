@@ -4,15 +4,19 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.groupproject.orders.Inventory;
+
 public class ApplianceList {
 	private List<Appliance> appliances = new LinkedList<Appliance>();
 	private static ApplianceList applianceList;
+	private Inventory inventory;
 
 	/*
 	 * Private constructor for singleton pattern
 	 * 
 	 */
 	private ApplianceList() {
+		inventory = Inventory.instance();
 	}
 
 	/**
@@ -47,6 +51,24 @@ public class ApplianceList {
 			}
 		}
 		return null;
+	}
+
+	public void printAllAppliances() {
+		for (Appliance appliance : appliances) {
+			System.out.println("Appliance [" + appliance.getId() + ", Brand Name: " + appliance.getBrandName()
+					+ ", Model Name: " + appliance.getModelName() + ", price: " + appliance.getPrice() + ", quantity: "
+					+ inventory.searchApplianceQuantity(appliance) + "]");
+		}
+	}
+
+	public void printSpecificAppliance(String type) {
+		for (Appliance appliance : appliances) {
+			if (appliance.getClass().getSimpleName().equals(type)) {
+				System.out.println("Appliance [" + appliance.getId() + ", Brand Name: " + appliance.getBrandName()
+						+ ", Model Name: " + appliance.getModelName() + ", price: " + appliance.getPrice()
+						+ ", quantity: " + inventory.searchApplianceQuantity(appliance) + "]");
+			}
+		}
 	}
 
 }

@@ -42,7 +42,7 @@ public class BackOrderList implements Serializable {
 	 * 
 	 */
 	public BackOrder search(String applianceId) {
-		for (Iterator iterator = backorders.iterator(); iterator.hasNext();) {
+		for (Iterator<BackOrder> iterator = backorders.iterator(); iterator.hasNext();) {
 			BackOrder backorder = (BackOrder) iterator.next();
 			if (backorder.getAppliance().getId().equals(applianceId)) {
 				return backorder;

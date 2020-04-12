@@ -34,7 +34,6 @@ import org.groupproject.appliances.ApplianceList;
 import org.groupproject.customer.Customer;
 import org.groupproject.customer.CustomerList;
 import org.groupproject.orders.BackOrder;
-import org.groupproject.orders.BackOrderList;
 import org.groupproject.orders.Purchase;
 import org.groupproject.orders.RepairPlan;
 import org.groupproject.orders.RepairPlanList;
@@ -227,11 +226,11 @@ public class UserInterface {
 	 * Displays all the options for types of appliances the user can add
 	 */
 	private void applianceOptions() {
-		System.out.println(CLOTH_DRYER + " To add a cloth dryer");
-		System.out.println(CLOTH_WASHER + " To add a cloth washer");
-		System.out.println(FURNACE + " To add a furnace");
-		System.out.println(KITCHEN_RANGE + " To add a kitchen range");
-		System.out.println(REFRIGERATOR + " To add a refrigerator");
+		System.out.println(CLOTH_DRYER + " Cloth dryer");
+		System.out.println(CLOTH_WASHER + " Cloth washer");
+		System.out.println(FURNACE + " Furnace");
+		System.out.println(KITCHEN_RANGE + " Kitchen range");
+		System.out.println(REFRIGERATOR + " Refrigerator");
 	}
 
 	/**
@@ -327,9 +326,8 @@ public class UserInterface {
 			String id = getToken("Enter appliance id");
 			int quantity = Integer.parseInt(getToken("Enter quantity"));
 			while (quantity > 0) {
-				backorder = company.getBackOrders().search(id);
-				if (backorder != null) {
-					company.getBackOrders().removeBackorder(id);
+				backorder = company.searchBackorder(id);
+				if (company.removeBackorder(id)) {
 					System.out.println("Backorder request fulfilled");
 					System.out.println(backorder);
 					quantity--;
@@ -435,9 +433,9 @@ public class UserInterface {
 	 * revenue.
 	 */
 	public void printRevenue() {
-		double salesRevenue = company.getSalesRevenue();
-		double repairRevenue = company.getSalesRevenue();
-		System.out.println("Sales revenue: " + salesRevenue);
+		double purchaseRevenue = company.getPurchaseRevenue();
+		double repairRevenue = company.getRepairPlanRevenue();
+		System.out.println("Sales revenue: " + purchaseRevenue);
 		System.out.println("Repair revenue: " + repairRevenue);
 	}
 
@@ -446,17 +444,30 @@ public class UserInterface {
 	 * specific type. It uses the appropriate Company methods to get the appliances.
 	 */
 	public void getAppliances() {
-		ApplianceList result;
-		String applianceType = getToken("Enter appliance type");
+		ApplianceList result = null;
+		applianceOptions();
+		String applianceType = getToken("Enter a number for the appliances of the specific type"
+				+ "or type 'all' to get all appliances of a every type");
 		if (applianceType.equalsIgnoreCase("all")) {
-			result = company.getAppliances();
+			company.getAppliances();
 		} else {
-			result = company.getAppliancesType(applianceType);
-		}
-		if (result != null) {
-			System.out.println(result);
-		} else {
-			System.out.println("No appliances found");
+			switch (Integer.parseInt(applianceType)) {
+			case CLOTH_DRYER:
+				company.getAppliancesType("ClothDryer");
+				break;
+			case CLOTH_WASHER:
+				company.getAppliancesType("ClothWasher");
+				break;
+			case FURNACE:
+				company.getAppliancesType("Furnace");
+				break;
+			case KITCHEN_RANGE:
+				company.getAppliancesType("KitchenRange");
+				break;
+			case REFRIGERATOR:
+				company.getAppliancesType("Refrigerator");
+				break;
+			}
 		}
 	}
 
@@ -493,15 +504,15 @@ public class UserInterface {
 	 * Method used to list all the back orders. It uses the appropriate Company
 	 * method to get all the backorders.
 	 */
-	public void getBackorders() {
-		BackOrderList result;
-		result = company.getBackOrders();
-		if (result != null) {
-			System.out.println(result);
-		} else {
-			System.out.println("No backorders found");
-		}
-	}
+//	public void getBackorders() {
+//		BackOrderList result;
+//		result = company.getBackOrders();
+//		if (result != null) {
+//			System.out.println(result);
+//		} else {
+//			System.out.println("No backorders found");
+//		}
+//	}
 
 	/**
 	 * Method to be called for saving the Company object. Uses the appropriate
@@ -581,7 +592,7 @@ public class UserInterface {
 				getCustomers();
 				break;
 			case LIST_BACKORDERS:
-				getBackorders();
+				// getBackorders();
 				break;
 			case SAVE:
 				save();

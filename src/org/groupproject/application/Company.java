@@ -15,6 +15,7 @@ import org.groupproject.orders.BackOrder;
 import org.groupproject.orders.BackOrderList;
 import org.groupproject.orders.Inventory;
 import org.groupproject.orders.Purchase;
+import org.groupproject.orders.PurchaseList;
 import org.groupproject.orders.RepairPlan;
 import org.groupproject.orders.RepairPlanList;
 import org.groupproject.orders.Sales;
@@ -26,6 +27,8 @@ public class Company implements Serializable {
 	private Inventory inventory;
 	private BackOrderList backOrderList;
 	private Sales sales;
+	private PurchaseList purchaseList;
+	private RepairPlanList repairPlanList;
 	private static Company company;
 
 	private Company() {
@@ -34,6 +37,8 @@ public class Company implements Serializable {
 		inventory = Inventory.instance();
 		backOrderList = BackOrderList.instance();
 		sales = Sales.instance();
+		purchaseList = PurchaseList.instance();
+		repairPlanList = RepairPlanList.instance();
 	}
 
 	public static Company instance() {
@@ -102,6 +107,7 @@ public class Company implements Serializable {
 
 	public Purchase addPurchase(Customer customer, Appliance appliance, int quantity) {
 		Purchase purchase = new Purchase(customer, appliance, quantity);
+		purchaseList.insertPurchase(purchase);
 		return purchase;
 	}
 
@@ -141,7 +147,15 @@ public class Company implements Serializable {
 	}
 
 	public RepairPlan enrollRepairPlan(String customerId, String applianceId) {
-		// TODO Auto-generated method stub
+		Appliance appliance = applianceList.search(applianceId);
+		Customer customer = customerList.search(customerId);
+		if (customer != null) {
+			if (appliance instanceof ClothWasher || appliance instanceof ClothDryer) {
+				RepairPlan repairPlan = new RepairPlan(customer, appliance);
+				repairPlanList.insertRepairPlan(repairPlan);
+				return repairPlan;
+			}
+		}
 		return null;
 	}
 
@@ -151,24 +165,24 @@ public class Company implements Serializable {
 	}
 
 	public boolean chargeRepairPlans() {
-		return false;
-		// TODO Auto-generated method stub
-
+		repairPlanList.chargeRepairPlans();
+		return true;
 	}
 
-	public double getSalesRevenue() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getPurchaseRevenue() {
+		return purchaseList.getTotalRevenue();
 	}
 
-	public ApplianceList getAppliances() {
-		// TODO Auto-generated method stub
-		return null;
+	public double getRepairPlanRevenue() {
+		return repairPlanList.getRepairPlanRevenue();
 	}
 
-	public ApplianceList getAppliancesType(String applianceType) {
-		// TODO Auto-generated method stub
-		return null;
+	public void getAppliances() {
+		applianceList.printAllAppliances();
+	}
+
+	public void getAppliancesType(String applianceType) {
+		applianceList.printSpecificAppliance(applianceType);
 	}
 
 	public RepairPlanList getUsersInRepairPlans() {
@@ -181,8 +195,12 @@ public class Company implements Serializable {
 		return null;
 	}
 
-	public BackOrderList getBackOrders() {
-		return backOrderList;
+	public BackOrder searchBackorder(String applianceId) {
+		return backOrderList.search(applianceId);
+	}
+
+	public boolean removeBackorder(String applianceId) {
+		return backOrderList.removeBackorder(applianceId);
 	}
 
 }
