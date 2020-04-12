@@ -57,4 +57,12 @@ public class Inventory implements Serializable {
 		return false;
 	}
 
+	public int searchApplianceQuantity(Appliance appliance) {
+		String key = appliance.getId();
+		if (stock.get(key) != null) {
+			return stock.get(key);
+		}
+		return 0;
+	}
+
 }

@@ -31,6 +31,10 @@ public class Purchase implements Serializable {
 		return quantity;
 	}
 
+	public double getTotalSale() {
+		return totalSale;
+	}
+
 	@Override
 	public String toString() {
 		return "Purchase: Total = " + totalSale + " , " + customer + ", Appliance = " + appliance + ", Quantity = "

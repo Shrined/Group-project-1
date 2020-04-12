@@ -1,11 +1,8 @@
 package org.groupproject.customer;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.groupproject.application.IdServer;
-import org.groupproject.orders.Purchase;
 
 public class Customer implements Serializable {
 
@@ -14,7 +11,6 @@ public class Customer implements Serializable {
 	private String phone;
 	private String id;
 	private static final String CUSTOMER_STRING = "C";
-	private List<Purchase> purchaseList = new LinkedList<Purchase>();
 
 	public Customer(String name, String phone) {
 		this.name = name;
