@@ -1,9 +1,13 @@
 package org.groupproject.orders;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseList {
+import org.groupproject.appliances.Appliance;
+import org.groupproject.customer.Customer;
+
+public class PurchaseList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static PurchaseList purchaseList;
 	private List<Purchase> purchases = new ArrayList<Purchase>();
@@ -43,5 +47,14 @@ public class PurchaseList {
 
 	public double getTotalRevenue() {
 		return totalRevenue;
+	}
+
+	public Purchase search(Customer customer, Appliance appliance) {
+		for (Purchase purchase : purchases) {
+			if (purchase.getCustomer().equals(customer) && purchase.getAppliance().equals(appliance)) {
+				return purchase;
+			}
+		}
+		return null;
 	}
 }

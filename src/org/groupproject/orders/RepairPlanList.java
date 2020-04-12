@@ -65,20 +65,35 @@ public class RepairPlanList implements Serializable {
 		return null;
 	}
 
+	public boolean containsCostumer(String customerId) {
+		for (Iterator<RepairPlan> iterator = repairPlans.iterator(); iterator.hasNext();) {
+			RepairPlan repairPlan = (RepairPlan) iterator.next();
+			if (repairPlan.getCustomer().getId().equals(customerId)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Charges each customer in a repair plan and adds to the total revenue
 	 */
-	public void chargeRepairPlans() {
+	public boolean chargeRepairPlans() {
+		if (repairPlans.isEmpty()) {
+			return false;
+		}
 		for (Iterator<RepairPlan> iterator = repairPlans.iterator(); iterator.hasNext();) {
 			RepairPlan repairPlan = (RepairPlan) iterator.next();
 			Appliance appliance = repairPlan.getAppliance();
 			if (appliance instanceof ClothDryer) {
 				repairPlanRevenue += ((ClothDryer) appliance).getRepairPlanCost();
+				repairPlan.getCustomer().updateBalance(((ClothDryer) appliance).getRepairPlanCost());
 			} else {
 				repairPlanRevenue += ((ClothWasher) appliance).getRepairPlanCost();
+				repairPlan.getCustomer().updateBalance(((ClothWasher) appliance).getRepairPlanCost());
 			}
 		}
-
+		return true;
 	}
 
 	/**
@@ -90,4 +105,24 @@ public class RepairPlanList implements Serializable {
 		return repairPlanRevenue;
 	}
 
+	public Set<RepairPlan> getRepairPlans() {
+		return repairPlans;
+	}
+
+	@Override
+	public String toString() {
+		return "RepairPlanList [repairPlans=" + repairPlans + "]";
+	}
+
+	public RepairPlan remove(String customerId, String applianceId) {
+		RepairPlan repairPlan = this.search(customerId, applianceId);
+		if (repairPlan != null) {
+			repairPlans.remove(repairPlan);
+			if (containsCostumer(customerId) == false) {
+				repairPlan.getCustomer().setInRepairPlan(false);
+			}
+			return repairPlan;
+		}
+		return null;
+	}
 }

@@ -44,14 +44,16 @@ public class Inventory implements Serializable {
 	}
 
 	public boolean removeFromStock(Appliance appliance, int quantity) {
-		String key = appliance.getId();
-		if (stock.containsKey(key)) {
-			if (quantity < stock.get(key)) {
-				stock.put(key, stock.get(key) - quantity);
-				return true;
-			} else if (quantity == stock.get(key)) {
-				stock.remove(key);
-				return true;
+		if (appliance != null) {
+			String key = appliance.getId();
+			if (stock.containsKey(key)) {
+				if (quantity < stock.get(key)) {
+					stock.put(key, stock.get(key) - quantity);
+					return true;
+				} else if (quantity == stock.get(key)) {
+					stock.remove(key);
+					return true;
+				}
 			}
 		}
 		return false;

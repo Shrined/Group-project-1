@@ -1,10 +1,12 @@
 package org.groupproject.orders;
 
+import java.io.Serializable;
+
 import org.groupproject.appliances.Appliance;
 import org.groupproject.customer.Customer;
 
-public class RepairPlan {
-
+public class RepairPlan implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Customer customer;
 	private Appliance appliance;
 
@@ -21,9 +23,13 @@ public class RepairPlan {
 		return appliance;
 	}
 
+	public String printInfo() {
+		return customer.printInfoWithBalance() + " " + appliance;
+	}
+
 	@Override
 	public String toString() {
-		return "RepairPlan [cutomerId: " + customer.getId() + ", applianceId: " + appliance.getId() + "]";
+		return "RepairPlan [Customer id: " + customer.getId() + ", Appliance id: " + appliance.getId() + "]";
 	}
 
 }

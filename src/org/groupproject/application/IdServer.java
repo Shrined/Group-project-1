@@ -13,13 +13,13 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 public class IdServer implements Serializable {
-
+	private static final long serialVersionUID = 1L;
 	private int customerIdCounter, applianceIdCounter;
 	private static IdServer server;
 
 	/*
-	 * Private constructor for singleton pattern 
-	 * Sets the customer and appliance Id counters both to 1
+	 * Private constructor for singleton pattern Sets the customer and appliance Id
+	 * counters both to 1
 	 */
 	private IdServer() {
 		customerIdCounter = 1;
@@ -63,15 +63,13 @@ public class IdServer implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return ("CustomerIdServer" + customerIdCounter + "\n"
-				+ "ApplianceIdServer" + applianceIdCounter);
+		return ("CustomerIdServer" + customerIdCounter + "\n" + "ApplianceIdServer" + applianceIdCounter);
 	}
 
 	/**
 	 * Retrieves the server object
 	 * 
-	 * @param input
-	 *            inputstream for deserialization
+	 * @param input inputstream for deserialization
 	 */
 	public static void retrieve(ObjectInputStream input) {
 		try {
