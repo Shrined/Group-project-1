@@ -1,12 +1,14 @@
 package org.groupproject.appliances;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.groupproject.orders.Inventory;
 
-public class ApplianceList {
+public class ApplianceList implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private List<Appliance> appliances = new LinkedList<Appliance>();
 	private static ApplianceList applianceList;
 	private Inventory inventory;

@@ -66,4 +66,8 @@ public class BackOrderList implements Serializable {
 		}
 	}
 
+	public ArrayList<BackOrder> getBackorders() {
+		return backorders;
+	}
+
 }

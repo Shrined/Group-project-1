@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CustomerList implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private List customers = new LinkedList();
+	private List<Customer> customers = new LinkedList<Customer>();
 	private static CustomerList customerList;
 
 	private CustomerList() {
@@ -39,6 +39,10 @@ public class CustomerList implements Serializable {
 			}
 		}
 		return null;
+	}
+
+	public List<Customer> getCustomers() {
+		return customers;
 	}
 
 }

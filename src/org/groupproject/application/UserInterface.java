@@ -30,13 +30,10 @@ import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 
 import org.groupproject.appliances.Appliance;
-import org.groupproject.appliances.ApplianceList;
 import org.groupproject.customer.Customer;
-import org.groupproject.customer.CustomerList;
 import org.groupproject.orders.BackOrder;
 import org.groupproject.orders.Purchase;
 import org.groupproject.orders.RepairPlan;
-import org.groupproject.orders.RepairPlanList;
 
 /**
  * 
@@ -324,6 +321,10 @@ public class UserInterface {
 		BackOrder backorder;
 		do {
 			String id = getToken("Enter appliance id");
+			while (company.getAppliance(id) == null) {
+				System.out.println("Invalid appliance id");
+				id = getToken("Re-enter appliance id");
+			}
 			int quantity = Integer.parseInt(getToken("Enter quantity"));
 			while (quantity > 0) {
 				backorder = company.searchBackorder(id);
@@ -351,18 +352,22 @@ public class UserInterface {
 	 * purchase.
 	 */
 	public void purchase() {
-		Purchase result = null;
+		Purchase result;
 		do {
 			result = null;
 			String customerId = getToken("Enter customer id");
 			Customer customer = company.getCustomer(customerId);
-			if (customer == null) {
+			while (customer == null) {
 				System.out.println("Invalid customer id");
+				customerId = getToken("Re-enter customer id");
+				customer = company.getCustomer(customerId);
 			}
 			String applianceId = getToken("Enter appliance id");
 			Appliance appliance = company.getAppliance(applianceId);
-			if (appliance == null) {
+			while (appliance == null) {
 				System.out.println("Invalid appliance id");
+				applianceId = getToken("Re-enter appliance id");
+				appliance = company.getAppliance(applianceId);
 			}
 			int quantity = Integer.parseInt(getToken("Enter quantity"));
 			boolean inStock = company.buyAppliance(applianceId, quantity);
@@ -374,8 +379,6 @@ public class UserInterface {
 			}
 			if (result != null) {
 				System.out.println(result);
-			} else {
-				System.out.println("Appliance is out of stock");
 			}
 		} while (yesOrNo("Do you want to make another purchase?"));
 	}
@@ -391,9 +394,10 @@ public class UserInterface {
 		String applianceId = getToken("Enter appliance id");
 		result = company.enrollRepairPlan(customerId, applianceId);
 		if (result != null) {
+			System.out.println("Enrollment succesfull");
 			System.out.println(result);
 		} else {
-			System.out.println("Appliance is not eligible for a repair plan");
+			System.out.println("Not eligible for repair plan");
 		}
 	}
 
@@ -424,6 +428,8 @@ public class UserInterface {
 		success = company.chargeRepairPlans();
 		if (success == true) {
 			System.out.println("Repair plans have been charged");
+		} else {
+			System.out.println("No repair plans found");
 		}
 	}
 
@@ -444,10 +450,9 @@ public class UserInterface {
 	 * specific type. It uses the appropriate Company methods to get the appliances.
 	 */
 	public void getAppliances() {
-		ApplianceList result = null;
 		applianceOptions();
 		String applianceType = getToken("Enter a number for the appliances of the specific type"
-				+ "or type 'all' to get all appliances of a every type");
+				+ " or type 'all' to get all appliances of a every type");
 		if (applianceType.equalsIgnoreCase("all")) {
 			company.getAppliances();
 		} else {
@@ -476,9 +481,9 @@ public class UserInterface {
 	 * method to get all users in repair plans.
 	 */
 	public void getUsersInRepairPlans() {
-		RepairPlanList result;
+		String result;
 		result = company.getUsersInRepairPlans();
-		if (result != null) {
+		if (!result.equals("")) {
 			System.out.println(result);
 		} else {
 			System.out.println("No users in repair plans found");
@@ -490,9 +495,9 @@ public class UserInterface {
 	 * to get all the customers.
 	 */
 	public void getCustomers() {
-		CustomerList result;
+		String result;
 		result = company.getCustomers();
-		if (result != null) {
+		if (!result.equals("")) {
 			System.out.println(result);
 		} else {
 			System.out.println("No customers found");
@@ -504,15 +509,15 @@ public class UserInterface {
 	 * Method used to list all the back orders. It uses the appropriate Company
 	 * method to get all the backorders.
 	 */
-//	public void getBackorders() {
-//		BackOrderList result;
-//		result = company.getBackOrders();
-//		if (result != null) {
-//			System.out.println(result);
-//		} else {
-//			System.out.println("No backorders found");
-//		}
-//	}
+	public void getBackorders() {
+		String result;
+		result = company.getBackOrders();
+		if (!result.equals("")) {
+			System.out.println(result);
+		} else {
+			System.out.println("No backorders found");
+		}
+	}
 
 	/**
 	 * Method to be called for saving the Company object. Uses the appropriate
@@ -592,7 +597,7 @@ public class UserInterface {
 				getCustomers();
 				break;
 			case LIST_BACKORDERS:
-				// getBackorders();
+				getBackorders();
 				break;
 			case SAVE:
 				save();
