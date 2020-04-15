@@ -281,7 +281,7 @@ public class Company implements Serializable {
 	 * @return total sales revenue
 	 */
 	public double getPurchaseRevenue() {
-		return purchaseList.getTotalRevenue();
+		return sales.getSalesRevenue();
 	}
 
 	/**
