@@ -2,6 +2,11 @@ package org.groupproject.appliances;
 
 import java.io.Serializable;
 
+/**
+ * This class represents a cloth washer appliance. Cloth washers are eligible
+ * for repair plans.
+ *
+ */
 public class ClothWasher extends Appliance implements Serializable {
 	private static final long serialVersionUID = 1784444746354884922L;
 	private double repairPlanCost;

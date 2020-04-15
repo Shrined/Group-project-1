@@ -2,6 +2,10 @@ package org.groupproject.orders;
 
 import java.io.Serializable;
 
+/**
+ * This class contains the sales revenue of the company.
+ *
+ */
 public class Sales implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static Sales sales;
@@ -27,6 +31,11 @@ public class Sales implements Serializable {
 		}
 	}
 
+	/**
+	 * Used to add the amount of a purchase to the sales revenue.
+	 * 
+	 * @param amount
+	 */
 	public void addRevenue(double amount) {
 		salesRevenue += amount;
 	}

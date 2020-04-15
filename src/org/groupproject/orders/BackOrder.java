@@ -5,6 +5,11 @@ import java.io.Serializable;
 import org.groupproject.appliances.Appliance;
 import org.groupproject.customer.Customer;
 
+/**
+ * This class represents a back order created when a purchase can't be
+ * fulfilled.
+ *
+ */
 public class BackOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Customer customer;
@@ -39,6 +44,11 @@ public class BackOrder implements Serializable {
 		return quantity;
 	}
 
+	/**
+	 * Used to print the back order's appliance brand, model, and quantity.
+	 * 
+	 * @return appliance brand, model, and quantity
+	 */
 	public String printInfo() {
 		return appliance.getBrandName() + ", " + appliance.getModelName() + ", Quantity: " + quantity;
 	}

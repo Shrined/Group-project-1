@@ -1,7 +1,9 @@
 package org.groupproject.application;
 
 /**
- * This class allows for the appliance Id and the customer Id to be serialized. Since the Id's are implemented within the Customer and Appliance classes are static, this class is necessary in order to properly serialize those values.
+ * This class allows for the appliance Id and the customer Id to be serialized.
+ *  Since the Id's are implemented within the Customer and Appliance classes are static,
+ *  this class is necessary in order to properly serialize those values.
  * 
  * The purpose of this class is the show how to properly serialize a static field in java
  * 

@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import org.groupproject.application.IdServer;
 
+/**
+ * The Appliance class is an abstract class that represents all types of
+ * appliances.
+ *
+ */
 public abstract class Appliance implements Serializable {
 	private static final long serialVersionUID = -3102951998712591043L;
 	private String brandName;

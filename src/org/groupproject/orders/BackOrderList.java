@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * This class represents a list of back orders in the company's system.
+ *
+ */
 public class BackOrderList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static BackOrderList backOrderList;
@@ -29,9 +33,18 @@ public class BackOrderList implements Serializable {
 		}
 	}
 
+	/**
+	 * Used to add a back order to the list.
+	 * 
+	 * @param backorder
+	 * @return true if backorder is added to the list
+	 */
 	public boolean insertBackOrder(BackOrder backorder) {
-		backorders.add(backorder);
-		return true;
+		if (backorder != null) {
+			backorders.add(backorder);
+			return true;
+		}
+		return false;
 	}
 
 	/**

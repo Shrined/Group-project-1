@@ -2,6 +2,11 @@ package org.groupproject.appliances;
 
 import java.io.Serializable;
 
+/**
+ * This class represents a furnace appliance. Furnaces have a heating output
+ * field.
+ *
+ */
 public class Furnace extends Appliance implements Serializable {
 	private static final long serialVersionUID = -4627808559553144068L;
 	private int heatingOutput;

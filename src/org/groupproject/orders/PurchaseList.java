@@ -7,6 +7,10 @@ import java.util.List;
 import org.groupproject.appliances.Appliance;
 import org.groupproject.customer.Customer;
 
+/**
+ * This class represents a list of purchases in the company's system.
+ *
+ */
 public class PurchaseList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static PurchaseList purchaseList;
@@ -49,6 +53,13 @@ public class PurchaseList implements Serializable {
 		return totalRevenue;
 	}
 
+	/**
+	 * Used to search for a purchase in the purchase list.
+	 * 
+	 * @param customer
+	 * @param appliance
+	 * @return purchase if found, and null otherwise
+	 */
 	public Purchase search(Customer customer, Appliance appliance) {
 		for (Purchase purchase : purchases) {
 			if (purchase.getCustomer().equals(customer) && purchase.getAppliance().equals(appliance)) {

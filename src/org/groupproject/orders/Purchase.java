@@ -5,6 +5,11 @@ import java.io.Serializable;
 import org.groupproject.appliances.Appliance;
 import org.groupproject.customer.Customer;
 
+/**
+ * This class represents a single purchase of an appliance model and its
+ * quantity by a customer.
+ *
+ */
 public class Purchase implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Customer customer;

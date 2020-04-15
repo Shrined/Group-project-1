@@ -132,7 +132,7 @@ public class UserInterface {
 	 */
 	private boolean yesOrNo(String prompt) {
 		String more = getToken(prompt + " Please type yes or anything else for no");
-		if (!more.equalsIgnoreCase("yes")) {
+		if (!more.equalsIgnoreCase("yes") || !more.equalsIgnoreCase("y")) {
 			return false;
 		}
 		return true;

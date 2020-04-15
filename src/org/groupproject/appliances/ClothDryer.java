@@ -2,6 +2,11 @@ package org.groupproject.appliances;
 
 import java.io.Serializable;
 
+/**
+ * This class represents a cloth dryer appliance. Cloth dryers are eligible for
+ * repair plans.
+ *
+ */
 public class ClothDryer extends Appliance implements Serializable {
 	private static final long serialVersionUID = 2672724908084246364L;
 	private double repairPlanCost;
