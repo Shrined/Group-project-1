@@ -5,6 +5,11 @@ import java.io.Serializable;
 import org.groupproject.appliances.Appliance;
 import org.groupproject.customer.Customer;
 
+/**
+ * This class represents a single repair plan for an appliance. Only cloth
+ * washers and cloth dryers are eligible for a repair plan.
+ *
+ */
 public class RepairPlan implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Customer customer;
@@ -23,6 +28,12 @@ public class RepairPlan implements Serializable {
 		return appliance;
 	}
 
+	/**
+	 * Used to print a repair plan including the customer's account balance and the
+	 * appliance.
+	 * 
+	 * @return repair plan with customer's account balance
+	 */
 	public String printInfo() {
 		return customer.printInfoWithBalance() + " " + appliance;
 	}

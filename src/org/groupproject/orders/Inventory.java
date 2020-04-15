@@ -6,6 +6,10 @@ import java.util.Map;
 
 import org.groupproject.appliances.Appliance;
 
+/**
+ * This class represents the company's appliance inventory.
+ *
+ */
 public class Inventory implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Integer> stock = new HashMap();
@@ -31,6 +35,13 @@ public class Inventory implements Serializable {
 		}
 	}
 
+	/**
+	 * Used to add an appliance model and its quantity to the inventory.
+	 * 
+	 * @param appliance
+	 * @param quantity
+	 * @return true if added to inventory
+	 */
 	public boolean addToStock(Appliance appliance, int quantity) {
 		if (appliance != null) {
 			String key = appliance.getId();
@@ -43,6 +54,15 @@ public class Inventory implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Used to remove the purchased quantity of an appliance model from the
+	 * inventory. If there is no more in stock this method removes the appliance
+	 * model from the inventory.
+	 * 
+	 * @param appliance
+	 * @param quantity
+	 * @return true if quantity is removed
+	 */
 	public boolean removeFromStock(Appliance appliance, int quantity) {
 		if (appliance != null) {
 			String key = appliance.getId();
@@ -59,6 +79,12 @@ public class Inventory implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Used to check the quantity in stock for an appliance model.
+	 * 
+	 * @param appliance
+	 * @return quantity in stock for the appliance model
+	 */
 	public int searchApplianceQuantity(Appliance appliance) {
 		String key = appliance.getId();
 		if (stock.get(key) != null) {

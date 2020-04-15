@@ -7,6 +7,11 @@ import java.util.List;
 
 import org.groupproject.orders.Inventory;
 
+/**
+ * The ApplianceList class keeps a list of all the appliance models in the
+ * company's system.
+ *
+ */
 public class ApplianceList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Appliance> appliances = new LinkedList<Appliance>();
@@ -45,6 +50,12 @@ public class ApplianceList implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Searches for an appliance using the appliance id.
+	 * 
+	 * @param applianceId
+	 * @return appliance if found and null otherwise
+	 */
 	public Appliance search(String applianceId) {
 		for (Iterator iterator = appliances.iterator(); iterator.hasNext();) {
 			Appliance appliance = (Appliance) iterator.next();
@@ -55,6 +66,9 @@ public class ApplianceList implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Used to print all the appliances in the list and how many are in stock.
+	 */
 	public void printAllAppliances() {
 		for (Appliance appliance : appliances) {
 			System.out.println("Appliance [" + appliance.getId() + ", Brand Name: " + appliance.getBrandName()
@@ -63,6 +77,11 @@ public class ApplianceList implements Serializable {
 		}
 	}
 
+	/**
+	 * Used to print all models of an specific type of appliance.
+	 * 
+	 * @param type
+	 */
 	public void printSpecificAppliance(String type) {
 		for (Appliance appliance : appliances) {
 			if (appliance.getClass().getSimpleName().equals(type)) {

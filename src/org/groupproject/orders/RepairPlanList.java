@@ -9,6 +9,10 @@ import org.groupproject.appliances.Appliance;
 import org.groupproject.appliances.ClothDryer;
 import org.groupproject.appliances.ClothWasher;
 
+/**
+ * This class represents a list of repair plans in the company's system.
+ *
+ */
 public class RepairPlanList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static RepairPlanList repairPlanList;
@@ -65,6 +69,12 @@ public class RepairPlanList implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Used to check if a customer has a repair plan in the list.
+	 * 
+	 * @param customerId
+	 * @return true if customer has at least one repair plan
+	 */
 	public boolean containsCostumer(String customerId) {
 		for (Iterator<RepairPlan> iterator = repairPlans.iterator(); iterator.hasNext();) {
 			RepairPlan repairPlan = (RepairPlan) iterator.next();
@@ -77,6 +87,8 @@ public class RepairPlanList implements Serializable {
 
 	/**
 	 * Charges each customer in a repair plan and adds to the total revenue
+	 * 
+	 * @return true if repair plan list is not empty
 	 */
 	public boolean chargeRepairPlans() {
 		if (repairPlans.isEmpty()) {
@@ -109,11 +121,13 @@ public class RepairPlanList implements Serializable {
 		return repairPlans;
 	}
 
-	@Override
-	public String toString() {
-		return "RepairPlanList [repairPlans=" + repairPlans + "]";
-	}
-
+	/**
+	 * Used to remove a repair plan from the list.
+	 * 
+	 * @param customerId
+	 * @param applianceId
+	 * @return the removed repair plan, and null if the repair plan is not found
+	 */
 	public RepairPlan remove(String customerId, String applianceId) {
 		RepairPlan repairPlan = this.search(customerId, applianceId);
 		if (repairPlan != null) {
@@ -125,4 +139,10 @@ public class RepairPlanList implements Serializable {
 		}
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return "Repair Plan List [Repair Plans = " + repairPlans + "]";
+	}
+
 }
