@@ -30,6 +30,7 @@ import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 
 import org.groupproject.appliances.Appliance;
+import org.groupproject.appliances.Furnace;
 import org.groupproject.customer.Customer;
 import org.groupproject.orders.BackOrder;
 import org.groupproject.orders.Purchase;
@@ -380,8 +381,13 @@ public class UserInterface {
 			if (inStock == true) {
 				result = company.addPurchase(customer, appliance, quantity);
 			} else if (inStock == false) {
-				System.out.println("This appliance is not in stock. A backorder has been placed");
-				System.out.println(company.createBackOrder(customer, appliance, quantity));
+				System.out.println("This appliance is not in stock");
+				if (appliance instanceof Furnace) {
+					System.out.println("Furnaces cannot be backordered");
+				} else {
+					System.out.println("A backorder has been placed");
+					System.out.println(company.createBackOrder(customer, appliance, quantity));
+				}
 			}
 			if (result != null) {
 				System.out.println(result);

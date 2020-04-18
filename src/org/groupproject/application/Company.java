@@ -379,7 +379,7 @@ public class Company implements Serializable {
 	 */
 	public boolean save() {
 		try {
-			FileOutputStream file = new FileOutputStream("CompanyData");
+			FileOutputStream file = new FileOutputStream("data/CompanyData");
 			ObjectOutputStream output = new ObjectOutputStream(file);
 			output.writeObject(company);
 			output.writeObject(IdServer.instance());
@@ -398,7 +398,7 @@ public class Company implements Serializable {
 	 */
 	public static Company retrieve() {
 		try {
-			FileInputStream file = new FileInputStream("CompanyData");
+			FileInputStream file = new FileInputStream("data/CompanyData");
 			ObjectInputStream input = new ObjectInputStream(file);
 			company = (Company) input.readObject();
 			IdServer.retrieve(input);
