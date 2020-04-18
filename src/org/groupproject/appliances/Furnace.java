@@ -11,7 +11,7 @@ public class Furnace extends Appliance implements Serializable {
 	private static final long serialVersionUID = -4627808559553144068L;
 	private int heatingOutput;
 
-	public Furnace(String brandName, String modelName, double price, int heatingOutput) {
+	public Furnace(String modelName, String brandName, double price, int heatingOutput) {
 		super(brandName, modelName, price);
 		this.heatingOutput = heatingOutput;
 	}

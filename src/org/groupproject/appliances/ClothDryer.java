@@ -11,7 +11,7 @@ public class ClothDryer extends Appliance implements Serializable {
 	private static final long serialVersionUID = 2672724908084246364L;
 	private double repairPlanCost;
 
-	public ClothDryer(String brandName, String modelName, double price, double repairPlanCost) {
+	public ClothDryer(String modelName, String brandName, double price, double repairPlanCost) {
 		super(brandName, modelName, price);
 		this.repairPlanCost = repairPlanCost;
 	}
