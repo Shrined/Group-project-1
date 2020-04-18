@@ -34,6 +34,7 @@ import org.groupproject.customer.Customer;
 import org.groupproject.orders.BackOrder;
 import org.groupproject.orders.Purchase;
 import org.groupproject.orders.RepairPlan;
+import org.groupproject.tests.Tests;
 
 /**
  * 
@@ -47,6 +48,7 @@ public class UserInterface {
 	private static UserInterface userInterface;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static Company company;
+	private static Tests tests;
 
 	/**
 	 * Menu options
@@ -81,6 +83,10 @@ public class UserInterface {
 	 * Otherwise, it gets a singleton Company object.
 	 */
 	private UserInterface() {
+		if (yesOrNo("Do you want to generate a test bed and invoke" + " the functionality using asserts?")) {
+			tests = Tests.instance();
+			tests.startTests();
+		}
 		if (yesOrNo("Look for saved data and  use it?")) {
 			retrieve();
 		} else {
@@ -132,7 +138,7 @@ public class UserInterface {
 	 */
 	private boolean yesOrNo(String prompt) {
 		String more = getToken(prompt + " Please type yes or anything else for no");
-		if (!more.equalsIgnoreCase("yes") || !more.equalsIgnoreCase("y")) {
+		if (!more.equalsIgnoreCase("yes") && !more.equalsIgnoreCase("y")) {
 			return false;
 		}
 		return true;

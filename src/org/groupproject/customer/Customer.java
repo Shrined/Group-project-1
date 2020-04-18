@@ -28,6 +28,14 @@ public class Customer implements Serializable {
 		return id;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public String getName() {
+		return name;
+	}
+
 	/**
 	 * Used to check if customer is in a repair plan.
 	 * 
