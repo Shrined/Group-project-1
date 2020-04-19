@@ -40,6 +40,11 @@ public class BackOrder implements Serializable {
 		return appliance;
 	}
 
+	/**
+	 * Getter for quantity
+	 * 
+	 * @return quantity
+	 */
 	public int getQuantity() {
 		return quantity;
 	}
@@ -53,6 +58,9 @@ public class BackOrder implements Serializable {
 		return appliance.getBrandName() + ", " + appliance.getModelName() + ", Quantity: " + quantity;
 	}
 
+	/**
+	 * String for BackOrder fields
+	 */
 	@Override
 	public String toString() {
 		return "Backorder Info [Customer ID: " + customer.getId() + ", Appliance ID: " + appliance.getId()

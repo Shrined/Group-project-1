@@ -24,22 +24,45 @@ public class Purchase implements Serializable {
 		this.totalSale = appliance.getPrice() * quantity;
 	}
 
+	/**
+	 * Getter for customer
+	 * 
+	 * @return customer
+	 */
 	public Customer getCustomer() {
 		return customer;
 	}
 
+	/**
+	 * Getter for appliance
+	 * 
+	 * @return appliance
+	 */
 	public Appliance getAppliance() {
 		return appliance;
 	}
 
+	/**
+	 * Getter for quantity
+	 * 
+	 * @return quantity
+	 */
 	public int getQuantity() {
 		return quantity;
 	}
 
+	/**
+	 * Getter for totalSale
+	 * 
+	 * @return totalSale
+	 */
 	public double getTotalSale() {
 		return totalSale;
 	}
 
+	/**
+	 * String for purchase information
+	 */
 	@Override
 	public String toString() {
 		return "Purchase: Total = " + totalSale + " , " + customer + ", Appliance = " + appliance + ", Quantity = "

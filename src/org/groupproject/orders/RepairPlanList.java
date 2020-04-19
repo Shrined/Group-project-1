@@ -140,6 +140,9 @@ public class RepairPlanList implements Serializable {
 		return null;
 	}
 
+	/**
+	 * String of repair plan list information
+	 */
 	@Override
 	public String toString() {
 		return "Repair Plan List [Repair Plans = " + repairPlans + "]";

@@ -60,6 +60,11 @@ public class CustomerList implements Serializable {
 		return null;
 	}
 
+	/**
+	 * getter for Customers
+	 * 
+	 * @return customers
+	 */
 	public List<Customer> getCustomers() {
 		return customers;
 	}

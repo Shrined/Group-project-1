@@ -40,10 +40,18 @@ public class Sales implements Serializable {
 		salesRevenue += amount;
 	}
 
+	/**
+	 * Getter for salesRevenue
+	 * 
+	 * @return salesRevenue
+	 */
 	public double getSalesRevenue() {
 		return salesRevenue;
 	}
 
+	/**
+	 * String of Sales information
+	 */
 	@Override
 	public String toString() {
 		return "Sales Revenue = " + salesRevenue;

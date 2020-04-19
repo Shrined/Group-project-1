@@ -43,10 +43,18 @@ public class Tests {
 	private float[] refrigeratorCapacity = new float[] { 12.0f, 15.5f, 16.8f, 10.5f, };
 	private List<Appliance> appliances = new ArrayList<Appliance>();
 
+	/**
+	 * Private constructor supporting the singleton pattern
+	 */
 	private Tests() {
 		company = Company.instance();
 	}
 
+	/**
+	 * Supports the singleton pattern
+	 * 
+	 * @return the singleton object
+	 */
 	public static Tests instance() {
 		if (tests == null) {
 			return (tests = new Tests());
@@ -55,6 +63,9 @@ public class Tests {
 		}
 	}
 
+	/**
+	 * Starts all the tests which includes business processes 1-6
+	 */
 	public void startTests() {
 		processOne();
 		processTwo();
@@ -64,6 +75,9 @@ public class Tests {
 		processSix();
 	}
 
+	/**
+	 * Test for business process 1
+	 */
 	public void processOne() {
 		ClothDryer clothDryer;
 		ClothWasher clothWasher;
@@ -121,6 +135,9 @@ public class Tests {
 		System.out.println("All of the tests have passed for business process one \n");
 	}
 
+	/**
+	 * Test for business process 2
+	 */
 	public void processTwo() {
 		Customer customer;
 		for (int i = 0; i < names.length; i++) {
@@ -133,6 +150,9 @@ public class Tests {
 		System.out.println("All of the tests have passed for business process two \n");
 	}
 
+	/**
+	 * Test for business process 3
+	 */
 	public void processThree() {
 		assert company.addAppliance(appliances.get(0).getId(), 1).equals(appliances.get(0));
 		company.createBackOrder(customers.get(1), appliances.get(1), 1);
@@ -140,6 +160,9 @@ public class Tests {
 		System.out.println("All of the tests have passed for business process three \n");
 	}
 
+	/**
+	 * Test for business process 4
+	 */
 	public void processFour() {
 		BackOrder backorder;
 		Purchase purchase;
@@ -155,6 +178,9 @@ public class Tests {
 		System.out.println("All of the tests have passed for business process four \n");
 	}
 
+	/**
+	 * Test for business process 5
+	 */
 	public void processFive() {
 		RepairPlan repairPlan;
 		repairPlan = Company.instance().enrollRepairPlan(customers.get(0).getId(), appliances.get(0).getId());
@@ -163,6 +189,9 @@ public class Tests {
 		System.out.println("All of the tests have passed for business process five \n");
 	}
 
+	/**
+	 * Test for business process 6
+	 */
 	public void processSix() {
 		RepairPlan repairPlan;
 		repairPlan = Company.instance().withdrawRepairPlan(customers.get(0).getId(), appliances.get(0).getId());
