@@ -170,6 +170,7 @@ public class Tests {
 		assert backorder.getAppliance().equals(appliances.get(2));
 		assert backorder.getCustomer().equals(customers.get(2));
 		assert backorder.getQuantity() == 1;
+		assert company.buyAppliance(appliances.get(0).getId(), 1);
 		purchase = company.addPurchase(customers.get(0), appliances.get(0), 1);
 		assert purchase.getAppliance().equals(appliances.get(0));
 		assert purchase.getCustomer().equals(customers.get(0));
