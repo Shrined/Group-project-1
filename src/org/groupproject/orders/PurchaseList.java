@@ -49,6 +49,11 @@ public class PurchaseList implements Serializable {
 		return purchases.add(purchase);
 	}
 
+	/**
+	 * Getter for totalRevenue
+	 * 
+	 * @return totalRevenue
+	 */
 	public double getTotalRevenue() {
 		return totalRevenue;
 	}

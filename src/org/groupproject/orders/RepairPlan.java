@@ -20,10 +20,20 @@ public class RepairPlan implements Serializable {
 		this.appliance = appliance;
 	}
 
+	/**
+	 * Getter for customer
+	 * 
+	 * @return customer
+	 */
 	public Customer getCustomer() {
 		return customer;
 	}
 
+	/**
+	 * Getter for appliance
+	 * 
+	 * @return appliance
+	 */
 	public Appliance getAppliance() {
 		return appliance;
 	}
@@ -38,6 +48,9 @@ public class RepairPlan implements Serializable {
 		return customer.printInfoWithBalance() + " " + appliance;
 	}
 
+	/**
+	 * String of repair plan information
+	 */
 	@Override
 	public String toString() {
 		return "RepairPlan [Customer id: " + customer.getId() + ", Appliance id: " + appliance.getId() + "]";

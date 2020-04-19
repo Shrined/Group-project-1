@@ -24,14 +24,29 @@ public class Customer implements Serializable {
 		id = CUSTOMER_STRING + (IdServer.instance()).getCustomerId();
 	}
 
+	/**
+	 * Getter for id
+	 * 
+	 * @return id
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Getter for phone
+	 * 
+	 * @return phone
+	 */
 	public String getPhone() {
 		return phone;
 	}
 
+	/**
+	 * Getter for name
+	 * 
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
@@ -49,10 +64,20 @@ public class Customer implements Serializable {
 		}
 	}
 
+	/**
+	 * Checks if customer is in repair plan
+	 * 
+	 * @return true if customer is in repair plan
+	 */
 	public boolean isInRepairPlan() {
 		return inRepairPlan;
 	}
 
+	/**
+	 * Sets the inRepairPlan value to true
+	 * 
+	 * @param inRepairPlan
+	 */
 	public void setInRepairPlan(boolean inRepairPlan) {
 		this.inRepairPlan = inRepairPlan;
 	}
@@ -77,12 +102,13 @@ public class Customer implements Serializable {
 				+ "]";
 	}
 
+	/**
+	 * Getter for balance
+	 * 
+	 * @return balance
+	 */
 	public double getBalance() {
 		return balance;
-	}
-
-	public void setBalance(double balance) {
-		this.balance = balance;
 	}
 
 	/**
@@ -94,6 +120,9 @@ public class Customer implements Serializable {
 		this.balance += balance;
 	}
 
+	/**
+	 * String of customer information
+	 */
 	@Override
 	public String toString() {
 		return "Customer [Name = " + name + ", Phone = " + phone + ", id = " + id + "]";
