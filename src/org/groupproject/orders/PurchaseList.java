@@ -15,14 +15,12 @@ public class PurchaseList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static PurchaseList purchaseList;
 	private List<Purchase> purchases = new ArrayList<Purchase>();
-	private double totalRevenue;
 
 	/*
 	 * Private constructor for singleton pattern
 	 * 
 	 */
 	private PurchaseList() {
-		totalRevenue = 0;
 	}
 
 	/**
@@ -39,23 +37,13 @@ public class PurchaseList implements Serializable {
 	}
 
 	/**
-	 * This method adds RepairPlan objects to a set
+	 * This method inserts a purchase into the purchaseList
 	 * 
-	 * @param repairPlan
-	 * @return true if the object doesn't exist in the set
+	 * @param purchase
+	 * @return true if purchase is added succesfully
 	 */
 	public boolean insertPurchase(Purchase purchase) {
-		totalRevenue += purchase.getTotalSale();
 		return purchases.add(purchase);
-	}
-
-	/**
-	 * Getter for totalRevenue
-	 * 
-	 * @return totalRevenue
-	 */
-	public double getTotalRevenue() {
-		return totalRevenue;
 	}
 
 	/**
