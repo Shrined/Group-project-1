@@ -17,7 +17,6 @@ import org.groupproject.orders.RepairPlan;
 
 public class Tests {
 	private Company company;
-	private Customer customer;
 	private static Tests tests;
 
 	/**

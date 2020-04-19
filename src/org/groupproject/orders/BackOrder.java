@@ -55,7 +55,8 @@ public class BackOrder implements Serializable {
 	 * @return appliance brand, model, and quantity
 	 */
 	public String printInfo() {
-		return appliance.getBrandName() + ", " + appliance.getModelName() + ", Quantity: " + quantity;
+		return "[Brand name: " + appliance.getBrandName() + ", Model name: " + appliance.getModelName() + ", Quantity: "
+				+ quantity;
 	}
 
 	/**
